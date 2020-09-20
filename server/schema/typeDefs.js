@@ -16,11 +16,21 @@ const typeDefs = gql`
   }
 
   type Attendance {
-    isPresent: Boolean!
-    date: String!
+    id: ID
+    day: Day
+  }
+
+  type Day {
+    isPresent: Boolean
+    date: String
   }
 
   type Classwork {
+    id: ID
+    assignment: Assignment
+  }
+
+  type Assignment {
     name: String
     grade: Int
     link: String
@@ -47,6 +57,18 @@ const typeDefs = gql`
       email: String!
       teacher: ID!
     ): User
+    addClasswork(
+      student: Boolean!
+      teacher: ID!
+      name: String!
+      description: String!
+      kind: String!
+    ): Boolean
+    gradeAssignment(username: String!, name: String!, grade: Int!): User
+    findAllStudents(teacher: ID!): [User]
+    # student mutations
+    submitClasswork(id: ID!, classworkId: ID!, link: String!): Boolean
+    checkIn(id: ID!): Boolean
   }
 `;
 

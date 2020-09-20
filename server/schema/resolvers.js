@@ -22,7 +22,7 @@ const resolvers = {
 
       if (!checkPass) throw new AuthenticationError("incorrect creds");
 
-      const token = await sign({
+      const token = sign({
         _id: user._id,
         email: user.email,
         username: user.username,
@@ -30,6 +30,7 @@ const resolvers = {
 
       return { token, user };
     },
+    // Teacher Mutations
     addTeacher: async (parent, args) => {
       const { username, email, password } = args;
 
@@ -41,7 +42,7 @@ const resolvers = {
         students: [],
       });
 
-      const token = await sign({
+      const token = sign({
         _id: user._id,
         email: user.email,
         username: user.username,
@@ -67,6 +68,88 @@ const resolvers = {
       teach.save();
 
       return student;
+    },
+    addClasswork: async (parent, args) => {
+      const { student, teacher, name, description, kind } = args;
+      const students = await User.updateMany(
+        { student, teacher },
+        {
+          $push: {
+            classwork: {
+              assignment: { name, grade: 0, link: "", description, kind },
+            },
+          },
+        }
+      );
+      if (students.n === students.nModified) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    gradeAssignment: async (parent, args) => {
+      const { username, name, grade } = args;
+      const student = await User.findOneAndUpdate(
+        { username },
+        {
+          $set: {
+            "classwork.$[elem].grade": grade,
+          },
+        },
+        {
+          new: true,
+          arrayFilters: [{ "elem.grade": { $lte: grade } }],
+          multi: false,
+          $upsert: true,
+        }
+      );
+      student.classwork.forEach((elem) => {
+        if (elem.assignment.name === name) {
+          elem.assignment.grade = grade;
+        }
+      });
+      student.save();
+      return student;
+    },
+    findAllStudents: async (parent, args) => {
+      const { teacher } = args;
+      const students = await User.find({ teacher });
+      return students;
+    },
+    // Student Mutations
+    submitClasswork: async (parent, args) => {
+      const { id, classworkId, link } = args;
+      const submit = await User.findOneAndUpdate(
+        { _id: id },
+        {
+          $set: {
+            classwork: [
+              { $where: { _id: { $eq: classworkId } } },
+              { "assignment.link": link },
+            ],
+          },
+        }
+      );
+      console.log(submit.classwork);
+      // submit.classwork.forEach((elem) => {
+      //   if (elem._id === classworkId) {
+      //     elem.assignment.link = link;
+      //   }
+      // });
+      // submit.save();
+      // return true;
+    },
+    checkIn: async (parent, args) => {
+      const { id } = args;
+      const checkedIn = await User.updateOne(
+        { _id: id },
+        { $push: { attendance: { isPresent: true } } }
+      );
+      if (checkedIn.n === checkedIn.nModified) {
+        return true;
+      } else {
+        return false;
+      }
     },
   },
 };

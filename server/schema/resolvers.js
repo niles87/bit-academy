@@ -127,15 +127,13 @@ const resolvers = {
     },
     checkIn: async (parent, args) => {
       const { id } = args;
-      const checkedIn = await User.updateOne(
+      const checkedIn = await User.findOneAndUpdate(
         { _id: id },
-        { $push: { attendance: { isPresent: true } } }
+        { $push: { attendance: { isPresent: true } } },
+        { new: true }
       );
-      if (checkedIn.n === checkedIn.nModified) {
-        return true;
-      } else {
-        return false;
-      }
+
+      return checkedIn;
     },
   },
 };

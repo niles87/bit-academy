@@ -10,8 +10,10 @@ const SchoolWorkSchema = new Schema({
 });
 
 const AttendanceSchema = new Schema({
-  isPresent: { type: Boolean, default: true },
-  date: { type: Date, default: Date.now.toString() },
+  attendance: {
+    isPresent: { type: Boolean, default: true },
+    date: { type: String, default: Date.now },
+  },
 });
 
 const UserSchema = new Schema(

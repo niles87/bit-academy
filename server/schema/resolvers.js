@@ -76,7 +76,11 @@ const resolvers = {
         {
           $push: {
             classwork: {
-              assignment: { name, grade: 0, link: "", description, kind },
+              name,
+              grade: 0,
+              link: "",
+              description,
+              kind,
             },
           },
         }
@@ -88,27 +92,19 @@ const resolvers = {
       }
     },
     gradeAssignment: async (parent, args) => {
-      const { username, name, grade } = args;
+      const { username, grade, classworkId } = args;
       const student = await User.findOneAndUpdate(
-        { username },
+        { username, "classwork._id": classworkId },
         {
           $set: {
-            "classwork.$[elem].grade": grade,
+            "classwork.$.grade": grade,
           },
         },
         {
           new: true,
-          arrayFilters: [{ "elem.grade": { $lte: grade } }],
-          multi: false,
-          $upsert: true,
         }
       );
-      student.classwork.forEach((elem) => {
-        if (elem.assignment.name === name) {
-          elem.assignment.grade = grade;
-        }
-      });
-      student.save();
+
       return student;
     },
     findAllStudents: async (parent, args) => {
@@ -120,24 +116,14 @@ const resolvers = {
     submitClasswork: async (parent, args) => {
       const { id, classworkId, link } = args;
       const submit = await User.findOneAndUpdate(
-        { _id: id },
+        { _id: id, "classwork._id": classworkId },
         {
-          $set: {
-            classwork: [
-              { $where: { _id: { $eq: classworkId } } },
-              { "assignment.link": link },
-            ],
-          },
-        }
+          $set: { "classwork.$.link": link },
+        },
+        { new: true }
       );
-      console.log(submit.classwork);
-      // submit.classwork.forEach((elem) => {
-      //   if (elem._id === classworkId) {
-      //     elem.assignment.link = link;
-      //   }
-      // });
-      // submit.save();
-      // return true;
+
+      return submit;
     },
     checkIn: async (parent, args) => {
       const { id } = args;

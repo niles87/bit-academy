@@ -17,20 +17,12 @@ const typeDefs = gql`
 
   type Attendance {
     id: ID
-    day: Day
-  }
-
-  type Day {
     isPresent: Boolean
     date: String
   }
 
   type Classwork {
     id: ID
-    assignment: Assignment
-  }
-
-  type Assignment {
     name: String
     grade: Int
     link: String
@@ -64,10 +56,10 @@ const typeDefs = gql`
       description: String!
       kind: String!
     ): Boolean
-    gradeAssignment(username: String!, name: String!, grade: Int!): User
+    gradeAssignment(username: String!, grade: Int!, classworkId: ID!): User
     findAllStudents(teacher: ID!): [User]
     # student mutations
-    submitClasswork(id: ID!, classworkId: ID!, link: String!): Boolean
+    submitClasswork(id: ID!, classworkId: ID!, link: String!): User
     checkIn(id: ID!): Boolean
   }
 `;

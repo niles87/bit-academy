@@ -2,20 +2,16 @@ const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const SchoolWorkSchema = new Schema({
-  assignment: {
-    name: String,
-    grade: Number,
-    link: String,
-    description: String,
-    kind: String,
-  },
+  name: String,
+  grade: Number,
+  link: String,
+  description: String,
+  kind: String,
 });
 
 const AttendanceSchema = new Schema({
-  attendance: {
-    isPresent: { type: Boolean, default: true },
-    date: { type: Date, default: Date.now },
-  },
+  isPresent: { type: Boolean, default: true },
+  date: { type: Date, default: Date.now.toString() },
 });
 
 const UserSchema = new Schema(

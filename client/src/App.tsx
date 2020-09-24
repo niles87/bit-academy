@@ -1,10 +1,5 @@
 import React, { Fragment } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Assignments } from "./components/Assignments";
 import { Attendance } from "./components/Attendance";
 import { Home } from "./components/Home";

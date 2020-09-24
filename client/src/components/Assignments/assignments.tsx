@@ -1,39 +1,42 @@
 import React, { useLayoutEffect, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
 import { FIND_ALL_STUDENTS } from "../../utils/mutations";
-
-interface attendance<T> {
-  attendance: T;
-}
-
-interface day {
-  isPresent: Boolean;
-  date: string;
-}
-
-const getDate = (date: string): string => {
-  return new Date(parseInt(date)).toLocaleDateString();
-};
+import { averagedGrades } from "../../utils/gpa";
+import { assignment } from "../../interfaces/assignment-I";
 
 export const Student = (props: any) => {
+  const gpa = averagedGrades(props.user.classwork);
   return (
     <table>
       <thead>
         <tr>
-          <th colSpan={2}>Attendance</th>
+          <th colSpan={5}>Assignments</th>
         </tr>
         <tr>
-          <th>Date</th>
-          <th>Present</th>
+          <th>Name</th>
+          <th>Link</th>
+          <th>Description</th>
+          <th>Kind</th>
+          <th>Grade</th>
         </tr>
       </thead>
       <tbody>
-        {props.user.attendance.map((day: attendance<day>) => (
-          <tr key={day.attendance.date}>
-            <td>{getDate(day.attendance.date)}</td>
-            <td>{day.attendance.isPresent ? "Present" : ""}</td>
+        {props.user.classwork.map((cw: assignment) => (
+          <tr key={cw.id}>
+            <td>{cw.name}</td>
+            <td>{cw.link}</td>
+            <td>{cw.description}</td>
+            <td>{cw.kind}</td>
+            <td>{cw.grade}</td>
           </tr>
         ))}
+        <tr>
+          <td>GPA</td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>{gpa}</td>
+        </tr>
       </tbody>
     </table>
   );
@@ -66,21 +69,27 @@ export const Teacher = (props: any) => {
     <table>
       <thead>
         <tr>
-          <th colSpan={3}>Attendance</th>
+          <th colSpan={6}>Assignments</th>
         </tr>
         <tr>
           <th>Student</th>
-          <th>Date</th>
-          <th>Present</th>
+          <th>Name</th>
+          <th>Link</th>
+          <th>Description</th>
+          <th>Kind</th>
+          <th>Grade</th>
         </tr>
       </thead>
       <tbody>
         {students.map((student: any) =>
-          student.attendance.map((day: attendance<day>) => (
-            <tr key={day.attendance.date}>
+          student.classwork.map((cw: assignment) => (
+            <tr key={cw.id}>
               <td>{student.username}</td>
-              <td>{getDate(day.attendance.date)}</td>
-              <td>{day.attendance.isPresent ? "Present" : ""}</td>
+              <td>{cw.name}</td>
+              <td>{cw.link}</td>
+              <td>{cw.description}</td>
+              <td>{cw.kind}</td>
+              <td>{cw.grade}</td>
             </tr>
           ))
         )}

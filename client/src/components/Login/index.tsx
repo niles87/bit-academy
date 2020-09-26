@@ -8,6 +8,8 @@ export const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
   const [login, { error }] = useMutation(LOGIN);
 
+  if (error) console.error(error);
+
   const handleInputChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = ev.target;
     setUserData({ ...userData, [name]: value });
@@ -56,7 +58,7 @@ export const Login = () => {
           New Teacher?{" "}
           <Link className="link" to="/register">
             Sign up
-          </Link>
+          </Link>{" "}
           here.
         </p>
       </div>

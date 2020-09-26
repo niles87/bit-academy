@@ -12,6 +12,8 @@ export const Register = () => {
   });
   const [addTeacher, { error }] = useMutation(ADD_TEACHER);
 
+  if (error) console.error(error);
+
   const handleInputChange = (ev: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = ev.target;
     setUserData({ ...userData, [name]: value });
@@ -63,7 +65,7 @@ export const Register = () => {
           Already registered?{" "}
           <Link className="link" to="/">
             Log in
-          </Link>
+          </Link>{" "}
           here.
         </p>
       </div>

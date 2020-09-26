@@ -7,6 +7,7 @@ import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { Container } from "./components/Container";
 import { Nav } from "./components/Nav";
+import { Create } from "./components/Create";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/assignments" component={Assignments} />
         <Route exact path="/attendance" component={Attendance} />
         <Route exact path="/home" component={Home} />
+        <Route exact path="/create" component={Create} />
       </Container>
     </Fragment>
   );

@@ -51,21 +51,17 @@ export const ADD_STUDENT = gql`
 
 export const ADD_CLASSWORK = gql`
   mutation addClasswork(
-    $student: Boolean!
     $teacher: ID!
     $name: String!
     $description: String!
     $kind: String!
   ) {
     addClasswork(
-      student: $student
       teacher: $teacher
       name: $name
       description: $description
       kind: $kind
-    ) {
-      Boolean
-    }
+    )
   }
 `;
 

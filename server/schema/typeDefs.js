@@ -54,7 +54,6 @@ const typeDefs = gql`
       teacher: ID!
     ): User
     addClasswork(
-      student: Boolean!
       teacher: ID!
       name: String!
       description: String!

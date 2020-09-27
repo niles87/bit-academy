@@ -70,9 +70,9 @@ const resolvers = {
       return student;
     },
     addClasswork: async (parent, args) => {
-      const { student, teacher, name, description, kind } = args;
+      const { teacher, name, description, kind } = args;
       const students = await User.updateMany(
-        { student, teacher },
+        { student: true, teacher },
         {
           $push: {
             classwork: {

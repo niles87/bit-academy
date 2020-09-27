@@ -14,7 +14,6 @@ import {
 import { averagedGrades } from "../../utils/gpa";
 import { assignment } from "../../interfaces/assignment-I";
 import { Modal } from "../Modal";
-import "./assignment.css";
 
 export const Student = (props: any) => {
   const [showModal, setShowModal] = useState(false);
@@ -58,7 +57,7 @@ export const Student = (props: any) => {
           onChange={handleInput}
           placeholder="Link"
         />
-        <button onClick={updateLink}>Update</button>
+        <button onClick={updateLink}>Update Link</button>
       </Modal>
       <table>
         <thead>
@@ -172,7 +171,7 @@ export const Teacher = (props: any) => {
           min={0}
           max={100}
         />
-        <button onClick={updateGrade}>Update</button>
+        <button onClick={updateGrade}>Update Grade</button>
       </Modal>
       <table>
         <thead>
@@ -195,7 +194,9 @@ export const Teacher = (props: any) => {
               <tr key={cw.id}>
                 <td>{student.username}</td>
                 <td>{cw.name}</td>
-                <td>{cw.link}</td>
+                <td>
+                  {cw.link.length > 0 ? <a href={cw.link}>{cw.link}</a> : ""}
+                </td>
                 <td>{cw.description}</td>
                 <td>{cw.kind}</td>
                 <td>{cw.grade}</td>

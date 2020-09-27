@@ -1,4 +1,5 @@
 import React from "react";
+import "./modal.css";
 
 export const Modal = (props: any) => {
   const modalClass = props.show ? "modal active" : "modal hide";

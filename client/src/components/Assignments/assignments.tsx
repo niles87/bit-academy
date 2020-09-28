@@ -12,8 +12,17 @@ import {
   SUBMIT_CLASSWORK,
 } from "../../utils/mutations";
 import { averagedGrades } from "../../utils/gpa";
-import { assignment } from "../../interfaces/assignment-I";
 import { Modal } from "../Modal";
+import "./assignments.css";
+
+interface assignment {
+  id: string;
+  name: string;
+  grade: number;
+  link: string;
+  description: string;
+  kind: string;
+}
 
 export const Student = (props: any) => {
   const [showModal, setShowModal] = useState(false);
@@ -59,18 +68,15 @@ export const Student = (props: any) => {
         />
         <button onClick={updateLink}>Update Link</button>
       </Modal>
-      <table>
+      <table className="assignments">
+        <caption>Assignments</caption>
         <thead>
-          <tr>
-            <th colSpan={5}>Assignments</th>
-          </tr>
           <tr>
             <th>Name</th>
             <th>Link</th>
             <th>Description</th>
             <th>Kind</th>
             <th>Grade</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -90,14 +96,13 @@ export const Student = (props: any) => {
               </td>
             </tr>
           ))}
+        </tbody>
+        <tfoot>
           <tr>
-            <td>GPA</td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <th>GPA</th>
             <td>{gpa}%</td>
           </tr>
-        </tbody>
+        </tfoot>
       </table>
     </Fragment>
   );
@@ -173,11 +178,9 @@ export const Teacher = (props: any) => {
         />
         <button onClick={updateGrade}>Update Grade</button>
       </Modal>
-      <table>
+      <table className="assignments">
+        <caption>Assignments</caption>
         <thead>
-          <tr>
-            <th colSpan={7}>Assignments</th>
-          </tr>
           <tr>
             <th>Student</th>
             <th>Name</th>
@@ -185,14 +188,13 @@ export const Teacher = (props: any) => {
             <th>Description</th>
             <th>Kind</th>
             <th>Grade</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           {students.map((student: any) =>
             student.classwork.map((cw: assignment) => (
               <tr key={cw.id}>
-                <td>{student.username}</td>
+                <th>{student.username}</th>
                 <td>{cw.name}</td>
                 <td>
                   {cw.link.length > 0 ? <a href={cw.link}>{cw.link}</a> : ""}

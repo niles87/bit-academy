@@ -1,0 +1,23 @@
+nav {
+  width: 100vw;
+  height: 50px;
+  background-color: #dddddd;
+}
+
+nav ul {
+  height: 100%;
+  display: flex;
+  list-style: none;
+  justify-content: center;
+  align-items: center;
+  color: #bbbbbb;
+  cursor: default;
+}
+
+.navLink {
+  text-decoration: none;
+  font-weight: 500;
+  margin: 5px;
+  color: #031b68;
+  cursor: pointer;
+}

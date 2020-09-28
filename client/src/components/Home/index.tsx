@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { QUERY } from "../../utils/queries";
 import { Tiles } from "../Tiles";
+import "./home.css";
 
 export const Home = () => {
   const { data, loading } = useQuery(QUERY);
@@ -9,7 +10,7 @@ export const Home = () => {
   if (loading) return <h2>Loading</h2>;
   return (
     <>
-      <h1>Welcome {data.self.username}</h1>
+      <h1 className="welcome">Welcome {data.self.username}</h1>
       <Tiles student={data.self.student} />
     </>
   );

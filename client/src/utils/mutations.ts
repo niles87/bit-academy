@@ -95,13 +95,6 @@ export const FIND_ALL_STUDENTS = gql`
       username
       email
       student
-      attendance {
-        attendance {
-          isPresent
-          date
-        }
-      }
-      attendanceList
       classwork {
         id
         name
@@ -132,25 +125,6 @@ export const SUBMIT_CLASSWORK = gql`
         kind
       }
       classworkList
-      teacher
-    }
-  }
-`;
-
-export const CHECK_IN = gql`
-  mutation checkIn($id: ID!) {
-    checkin(id: $id) {
-      id
-      username
-      email
-      student
-      attendance {
-        attendance {
-          isPresent
-          date
-        }
-      }
-      attendanceList
       teacher
     }
   }

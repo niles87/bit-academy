@@ -1,0 +1,68 @@
+.assignments {
+  margin: 10px auto;
+  width: 100%;
+  table-layout: fixed;
+  border: 2px solid #444;
+  border-radius: 5px;
+  background-color: #444;
+  cursor: default;
+}
+
+.assignments caption {
+  font-weight: 500;
+  font-size: 20px;
+  margin: 5px;
+}
+
+.assignments thead {
+  background-color: #999;
+}
+
+.assignments thead th:nth-child(1) {
+  width: 10%;
+}
+.assignments thead th:nth-child(2) {
+  width: 15%;
+}
+.assignments thead th:nth-child(3) {
+  width: 20%;
+}
+.assignments thead th:nth-child(4) {
+  width: 20%;
+}
+.assignments thead th:nth-child(5) {
+  width: 15%;
+}
+.assignments thead th:nth-child(6) {
+  width: 10%;
+}
+.assignments thead th:nth-child(7) {
+  width: 10%;
+}
+
+.assignments tbody td {
+  overflow: hidden;
+  padding: 5px;
+}
+
+.assignments tbody button {
+  color: #fff;
+  background-color: #038118;
+  padding: 3px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.assignments tbody a {
+  text-decoration: none;
+  color: #3b0da7;
+  font-weight: 500;
+}
+
+.assignments tbody tr:nth-child(odd) {
+  background-color: #eee;
+}
+
+.assignments tbody tr:nth-child(even) {
+  background-color: #999;
+}

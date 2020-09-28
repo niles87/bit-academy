@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Assignments } from "./components/Assignments";
-import { Attendance } from "./components/Attendance";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
 import { Register } from "./components/Register";
 import { Container } from "./components/Container";
 import { Nav } from "./components/Nav";
 import { Create } from "./components/Create";
+import { Classroom } from "./components/Classroom";
 import "./App.css";
 
 function App() {
@@ -16,9 +16,9 @@ function App() {
       <Nav />
       <Container>
         <Route exact path="/assignments" component={Assignments} />
-        <Route exact path="/attendance" component={Attendance} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/create" component={Create} />
+        <Route exact path="/classroom" component={Classroom} />
       </Container>
     </Fragment>
   );

@@ -11,10 +11,10 @@ export const averagedGrades = (arr: assignment[]): number => {
   const homeWorkWeight: number = 0.25;
   const quizWeight: number = 0.3;
   const examWeight: number = 0.45;
-  let weightedAverage,
-    homeworkAverage,
-    quizAverage,
-    examAverage,
+  let weightedAverage: number = 0,
+    homeworkAverage: number = 0,
+    quizAverage: number = 0,
+    examAverage: number = 0,
     homeworkCount: number = 0,
     quizCount: number = 0,
     examCount: number = 0,

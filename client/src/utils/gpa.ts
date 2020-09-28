@@ -1,4 +1,11 @@
-import { assignment } from "../interfaces/assignment-I";
+interface assignment {
+  id: string;
+  name: string;
+  grade: number;
+  link: string;
+  description: string;
+  kind: string;
+}
 
 export const averagedGrades = (arr: assignment[]): number => {
   const homeWorkWeight: number = 0.25;

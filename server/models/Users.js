@@ -9,13 +9,6 @@ const SchoolWorkSchema = new Schema({
   kind: String,
 });
 
-const AttendanceSchema = new Schema({
-  attendance: {
-    isPresent: { type: Boolean, default: true },
-    date: { type: String, default: Date.now },
-  },
-});
-
 const UserSchema = new Schema(
   {
     username: { type: String, required: true, unique: true },
@@ -29,7 +22,6 @@ const UserSchema = new Schema(
     },
     student: { type: Boolean, required: true },
     students: [{ type: Schema.Types.ObjectId, ref: "User" }],
-    attendance: [AttendanceSchema],
     classwork: [SchoolWorkSchema],
     teacher: { type: Schema.Types.ObjectId, ref: "User" },
   },
@@ -54,10 +46,6 @@ UserSchema.methods.comparePassword = async function (password) {
 
 UserSchema.virtual("studentsList").get(function () {
   return this.students.length;
-});
-
-UserSchema.virtual("attendanceList").get(function () {
-  return this.attendance.length;
 });
 
 UserSchema.virtual("classworkList").get(function () {

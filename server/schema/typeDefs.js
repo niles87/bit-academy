@@ -8,21 +8,9 @@ const typeDefs = gql`
     student: Boolean!
     students: [ID]
     studentsList: Int
-    attendance: [Attendance]
-    attendanceList: Int
     classwork: [Classwork]
     classworkList: Int
     teacher: ID
-  }
-
-  type Attendance {
-    id: ID
-    attendance: Day
-  }
-
-  type Day {
-    isPresent: Boolean
-    date: String
   }
 
   type Classwork {

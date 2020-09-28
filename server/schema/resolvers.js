@@ -58,7 +58,6 @@ const resolvers = {
         email,
         password,
         student: true,
-        attendance: [],
         classwork: [],
         teacher,
       });
@@ -124,16 +123,6 @@ const resolvers = {
       );
 
       return submit;
-    },
-    checkIn: async (parent, args) => {
-      const { id } = args;
-      const checkedIn = await User.findOneAndUpdate(
-        { _id: id },
-        { $push: { attendance: { isPresent: true } } },
-        { new: true }
-      );
-
-      return checkedIn;
     },
   },
 };

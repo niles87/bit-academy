@@ -1,6 +1,8 @@
 const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const path = require("path");
+const http = require("http");
+const socket = require("socket.io");
 
 const { resolvers, typeDefs } = require("./schema");
 const { authMiddleWare } = require("./config/authentication");
@@ -8,6 +10,32 @@ const db = require("./config/connection");
 
 const app = express();
 const PORT = process.env.PORT || 4200;
+
+const httpServ = http.createServer(app);
+const io = socket(httpServ);
+
+const person = {};
+io.on("connection", (socket) => {
+  if (!person[socket.id]) {
+    person[socket.id] = socket.id;
+  }
+  socket.emit("yourID", socket.id);
+  io.sockets.emit("allUsers", person);
+  socket.on("disconnect", () => {
+    delete person[socket.id];
+  });
+
+  socket.on("callUser", (data) => {
+    io.to(data.userToCall).emit("hey", {
+      signal: data.signalData,
+      from: data.from,
+    });
+  });
+
+  socket.on("acceptCall", (data) => {
+    io.to(data.to).emit("callAccepted", data.signal);
+  });
+});
 
 const server = new ApolloServer({
   typeDefs,
@@ -30,7 +58,7 @@ app.get("*", (req, res) => {
 });
 
 db.on("connected", () => {
-  app.listen(PORT, () => {
+  httpServ.listen(PORT, () => {
     console.log(`api running on http://localhost:${PORT}`);
     console.log(`http://localhost:${PORT}${server.graphqlPath}`);
   });

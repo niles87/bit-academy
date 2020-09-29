@@ -10,7 +10,7 @@ export const Home = () => {
   if (loading) return <h2>Loading</h2>;
   return (
     <>
-      <h1 className="welcome">Welcome {data.self.username}</h1>
+      <h1 className="message">Welcome {data.self.username}</h1>
       <Tiles student={data.self.student} />
     </>
   );

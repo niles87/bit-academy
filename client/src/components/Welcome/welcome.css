@@ -1,0 +1,9 @@
+.welcome {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.welcome h1 {
+  font-size: 50px;
+}

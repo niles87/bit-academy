@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { ADD_TEACHER } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
+import "./register.css";
 
 export const Register = () => {
   const [userData, setUserData] = useState({
@@ -58,13 +59,13 @@ export const Register = () => {
             placeholder="Password"
           />
         </div>
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
       <div>
         <p>
           Already registered?{" "}
           <Link className="link" to="/">
-            Log in
+            <span>Log in</span>
           </Link>{" "}
           here.
         </p>

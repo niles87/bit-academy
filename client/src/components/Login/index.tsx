@@ -3,6 +3,7 @@ import { useMutation } from "@apollo/react-hooks";
 import { LOGIN } from "../../utils/mutations";
 import Auth from "../../utils/auth";
 import { Link } from "react-router-dom";
+import "./login.css";
 
 export const Login = () => {
   const [userData, setUserData] = useState({ email: "", password: "" });
@@ -57,7 +58,7 @@ export const Login = () => {
         <p>
           New Teacher?{" "}
           <Link className="link" to="/register">
-            Sign up
+            <span>Sign up</span>
           </Link>{" "}
           here.
         </p>

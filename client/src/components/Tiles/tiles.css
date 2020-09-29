@@ -7,7 +7,14 @@
   justify-content: center;
 }
 
-.tile {
+.tile-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: red;
+  font-size: 20px;
+}
+
+.tile-link .tile {
   width: 250px;
   height: 175px;
   border: #000 solid 2px;
@@ -16,11 +23,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.tile a {
-  text-decoration: none;
-  font-weight: 500;
-  color: red;
-  font-size: 20px;
 }

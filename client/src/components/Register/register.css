@@ -37,6 +37,12 @@
   border: none;
 }
 
+.register form input:focus,
+.register form button:focus {
+  outline: 2px dashed #2b85cf;
+  outline-offset: 2px;
+}
+
 .link {
   text-decoration: none;
 }

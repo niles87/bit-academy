@@ -28,6 +28,12 @@
   margin-bottom: 5px;
 }
 
+.login form input:focus,
+.login form button:focus {
+  outline: 2px dashed #2b85cf;
+  outline-offset: 2px;
+}
+
 .login form button {
   color: #ffffff;
   background-color: #0000ff;

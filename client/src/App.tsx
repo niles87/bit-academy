@@ -8,6 +8,7 @@ import { Container } from "./components/Container";
 import { Nav } from "./components/Nav";
 import { Create } from "./components/Create";
 import { Classroom } from "./components/Classroom";
+import { CreateRoom } from "./components/CreateRoom";
 import "./App.css";
 
 function App() {
@@ -18,7 +19,8 @@ function App() {
         <Route exact path="/assignments" component={Assignments} />
         <Route exact path="/home" component={Home} />
         <Route exact path="/create" component={Create} />
-        <Route exact path="/classroom" component={Classroom} />
+        <Route exact path="/classroom" component={CreateRoom} />
+        <Route path="/classroom/:roomId" component={Classroom} />
       </Container>
     </Fragment>
   );

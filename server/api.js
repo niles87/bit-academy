@@ -24,7 +24,7 @@ io.on("connection", (socket) => {
     }
     roomSocket[socket.id] = roomId;
 
-    const peopleInRoom = person[roomId].filter((id) => id == socket.id);
+    const peopleInRoom = person[roomId].filter((id) => id !== socket.id);
 
     socket.emit("all users", peopleInRoom);
   });
@@ -32,12 +32,12 @@ io.on("connection", (socket) => {
   socket.on("sending signal", (payload) => {
     io.to(payload.userToSignal).emit("user joined", {
       signal: payload.signal,
-      callerId: payload.callerId,
+      callerID: payload.callerID,
     });
   });
 
   socket.on("returning signal", (payload) => {
-    io.to(payload.callerId).emit("receiving returned signal", {
+    io.to(payload.callerID).emit("receiving returned signal", {
       signal: payload.signal,
       id: socket.id,
     });
@@ -52,26 +52,6 @@ io.on("connection", (socket) => {
     }
   });
 });
-//   if (!person[socket.id]) {
-//     person[socket.id] = socket.id;
-//   }
-//   socket.emit("yourID", socket.id);
-//   io.sockets.emit("allUsers", person);
-//   socket.on("disconnect", () => {
-//     delete person[socket.id];
-//   });
-
-//   socket.on("callUser", (data) => {
-//     io.to(data.userToCall).emit("hey", {
-//       signal: data.signalData,
-//       from: data.from,
-//     });
-//   });
-
-//   socket.on("acceptCall", (data) => {
-//     io.to(data.to).emit("callAccepted", data.signal);
-//   });
-// });
 
 const server = new ApolloServer({
   typeDefs,

@@ -6,14 +6,18 @@ export const CreateRoom = (props: any) => {
   const { data, loading } = useQuery(QUERY);
   if (!data) return <h1>You need to login to use this</h1>;
   if (loading) return <h1>Loading</h1>;
-  const room = () => {
+  const room = (): void => {
     const id = data.self.id;
     if (!data.self.student) {
       props.history.push(`/classroom/${id}`);
     } else {
-      return <h2>You need to be a teacher for this</h2>;
+      props.history.push(`/classroom/${data.self.teacher}`);
     }
   };
 
-  return <button onClick={room}>Create Room</button>;
+  return (
+    <button onClick={room}>
+      {data.self.student ? "Join Class" : "Create Room"}
+    </button>
+  );
 };

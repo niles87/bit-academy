@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Modal } from "../Modal";
 import { QUERY } from "../../utils/queries";
 import { ADD_CLASSWORK, ADD_STUDENT } from "../../utils/mutations";
+import "./create.css";
 
 export const Create = () => {
   const { data, loading } = useQuery(QUERY);
@@ -85,6 +86,7 @@ export const Create = () => {
             name="username"
             onChange={studentChange}
             placeholder="Student Name"
+            required
           />
         </div>
         <div>
@@ -93,6 +95,7 @@ export const Create = () => {
             name="password"
             onChange={studentChange}
             placeholder="Student Password"
+            required
           />
         </div>
         <div>
@@ -101,6 +104,7 @@ export const Create = () => {
             name="email"
             onChange={studentChange}
             placeholder="Student Email"
+            required
           />
         </div>
         <button onClick={createStudent}>Add Student</button>
@@ -112,6 +116,7 @@ export const Create = () => {
             name="name"
             onChange={assignmentChange}
             placeholder="Assignment Name"
+            required
           />
         </div>
         <div>
@@ -120,6 +125,7 @@ export const Create = () => {
             name="description"
             onChange={assignmentChange}
             placeholder="Assignment Description"
+            required
           />
         </div>
         <div>
@@ -130,17 +136,20 @@ export const Create = () => {
             <option value="exam">Exam</option>
           </select>
         </div>
-        <button onClick={createAssignment}>Add Assignment</button>
+        <button
+          onClick={createAssignment}
+          disabled={assignmentData.kind === "" ? true : false}
+        >
+          Add Assignment
+        </button>
       </Modal>
-      <div>
-        <p className="create addStudent" onClick={addStudentM}>
-          Add a new student
-        </p>
-      </div>
-      <div>
-        <p className="create addAssignment" onClick={addAssignmentM}>
-          Add a new assignment
-        </p>
+      <div className="create-container">
+        <div className="create">
+          <p onClick={addStudentM}>Add a new student</p>
+        </div>
+        <div className="create">
+          <p onClick={addAssignmentM}>Add a new assignment</p>
+        </div>
       </div>
     </Fragment>
   );

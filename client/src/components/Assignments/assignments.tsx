@@ -60,12 +60,14 @@ export const Student = (props: any) => {
   return (
     <Fragment>
       <Modal show={showModal} handleClose={closeModal}>
-        <input
-          type="text"
-          name="link"
-          onChange={handleInput}
-          placeholder="Link"
-        />
+        <div>
+          <input
+            type="text"
+            name="link"
+            onChange={handleInput}
+            placeholder="Link"
+          />
+        </div>
         <button onClick={updateLink}>Update Link</button>
       </Modal>
       <table className="assignments">
@@ -76,13 +78,13 @@ export const Student = (props: any) => {
             <th>Link</th>
             <th>Description</th>
             <th>Kind</th>
-            <th>Grade</th>
+            <th id="grade">Grade</th>
           </tr>
         </thead>
         <tbody>
           {props.user.classwork.map((cw: assignment) => (
             <tr key={cw.id}>
-              <td>{cw.name}</td>
+              <th>{cw.name}</th>
               <td>
                 {cw.link.length > 0 ? <a href={cw.link}>{cw.link}</a> : ""}
               </td>
@@ -100,7 +102,10 @@ export const Student = (props: any) => {
         <tfoot>
           <tr>
             <th>GPA</th>
-            <td>{gpa}%</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td headers="grade">{gpa}%</td>
           </tr>
         </tfoot>
       </table>
@@ -115,7 +120,7 @@ export const Teacher = (props: any) => {
   const [showModal, setShowModal] = useState(false);
   const [assignId, setAssignId] = useState("");
   const [studentName, setStudentName] = useState("");
-  const [grade, setGrade] = useState(0);
+  const [grade, setGrade] = useState<number | undefined>();
 
   useLayoutEffect(() => {
     fetchData();
@@ -157,7 +162,7 @@ export const Teacher = (props: any) => {
     } catch (error) {
       console.error(error);
     }
-    setGrade(0);
+    setGrade(undefined);
     closeModal();
   };
 
@@ -172,7 +177,7 @@ export const Teacher = (props: any) => {
           type="number"
           name="grade"
           onChange={handleInput}
-          placeholder="Grade 0-100"
+          placeholder="Grade%"
           min={0}
           max={100}
         />

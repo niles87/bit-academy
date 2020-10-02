@@ -10,14 +10,30 @@ interface tile {
 
 export const Tiles = (props: any) => {
   let links: tile[];
-  props.student ? (links = tiles.slice(0, tiles.length - 1)) : (links = tiles);
+  props.user.student
+    ? (links = tiles.slice(0, tiles.length - 1))
+    : (links = tiles);
   return (
     <div className="tile-container">
-      {links.map((tile: tile) => (
-        <Link to={tile.url} key={tile.name} className="tile-link">
-          <div className="tile">{tile.name}</div>
-        </Link>
-      ))}
+      {links.map((tile: tile) =>
+        tile.name === "Classroom" ? (
+          <Link
+            to={
+              props.user.student
+                ? tile.url + "/" + props.user.teacher
+                : tile.url + "/" + props.user.id
+            }
+            key={tile.name}
+            className="tile-link"
+          >
+            <div className="tile">{tile.name}</div>
+          </Link>
+        ) : (
+          <Link to={tile.url} key={tile.name} className="tile-link">
+            <div className="tile">{tile.name}</div>
+          </Link>
+        )
+      )}
     </div>
   );
 };

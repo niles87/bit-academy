@@ -20,12 +20,6 @@ export const Nav = () => {
           |
         </li>
         <li>
-          <Link className="navLink" to="/classroom">
-            Classroom
-          </Link>
-          |
-        </li>
-        <li>
           <a
             className="navLink"
             href="/"

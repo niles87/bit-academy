@@ -66,3 +66,7 @@
 .assignments tbody tr:nth-child(even) {
   background-color: #999;
 }
+
+.assignments tfoot {
+  color: #eee;
+}

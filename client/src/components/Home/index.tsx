@@ -11,7 +11,7 @@ export const Home = () => {
   return (
     <>
       <h1 className="message">Welcome {data.self.username}</h1>
-      <Tiles student={data.self.student} />
+      <Tiles user={data.self} />
     </>
   );
 };

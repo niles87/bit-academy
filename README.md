@@ -1,1 +1,9 @@
 # bit-academy
+
+New and improved Bit Academy site, took the time to trim off a lot of fat from class components to decrease load times in Heroku.
+
+Check out the deployed [link](https://bit-academy.herokuapp.com)
+
+App based on my groups final project before graduation.
+
+A Web Resource for the Education System. With Bit Academy we aim to deliver a robust app that eases the user experience and makes connecting a breeze in the digital age. Utilizing seperate teacher and student portals, users will be able to assign/submit assignments and chat live via webcam. We hope you enjoy our demonstration of Bit Academy and see the reliablity of it's use as we would love for you to consider it for your use in your education system.

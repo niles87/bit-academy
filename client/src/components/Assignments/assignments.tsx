@@ -25,29 +25,29 @@ interface assignment {
 }
 
 export const Student = (props: any) => {
-  const [showModal, setShowModal] = useState(false);
-  const [link, setLink] = useState("");
-  const [id, setId] = useState("");
-  const [assignId, setAssignId] = useState("");
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [link, setLink] = useState<string>("");
+  const [id, setId] = useState<string>("");
+  const [assignId, setAssignId] = useState<string>("");
   const [sendLink] = useMutation(SUBMIT_CLASSWORK);
-  const gpa = averagedGrades(props.user.classwork);
+  const gpa: number = averagedGrades(props.user.classwork);
 
-  const openModal = (id: string, classworkId: string) => {
+  const openModal = (id: string, classworkId: string): void => {
     setId(id);
     setAssignId(classworkId);
     setShowModal(true);
   };
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     setShowModal(false);
   };
 
-  const handleInput = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (ev: ChangeEvent<HTMLInputElement>): void => {
     const { value } = ev.target;
     setLink(value);
   };
 
-  const updateLink = async () => {
+  const updateLink = async (): Promise<void> => {
     try {
       await sendLink({ variables: { id, classworkId: assignId, link } });
     } catch (error) {
@@ -114,12 +114,12 @@ export const Student = (props: any) => {
 };
 
 export const Teacher = (props: any) => {
-  const [students, setStudents] = useState([]);
   const [findAllStudents] = useMutation(FIND_ALL_STUDENTS);
   const [sendGrade] = useMutation(GRADE_ASSIGNMENT);
-  const [showModal, setShowModal] = useState(false);
-  const [assignId, setAssignId] = useState("");
-  const [studentName, setStudentName] = useState("");
+  const [students, setStudents] = useState<Array<any>>([]);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [assignId, setAssignId] = useState<string>("");
+  const [studentName, setStudentName] = useState<string>("");
   const [grade, setGrade] = useState<number | undefined>();
 
   useLayoutEffect(() => {
@@ -154,7 +154,7 @@ export const Teacher = (props: any) => {
     setGrade(parseInt(value));
   };
 
-  const updateGrade = async () => {
+  const updateGrade = async (): Promise<void> => {
     try {
       await sendGrade({
         variables: { username: studentName, grade, classworkId: assignId },

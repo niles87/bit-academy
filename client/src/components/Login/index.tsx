@@ -6,18 +6,28 @@ import { Welcome } from "../Welcome";
 import Auth from "../../utils/auth";
 import "./login.css";
 
+interface UserData {
+  email: string;
+  password: string;
+}
+
 export const Login = () => {
-  const [userData, setUserData] = useState({ email: "", password: "" });
+  const [userData, setUserData] = useState<UserData>({
+    email: "",
+    password: "",
+  });
   const [login, { error }] = useMutation(LOGIN);
 
   if (error) console.error(error);
 
-  const handleInputChange = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (ev: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = ev.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const formSubmit = async (ev: ChangeEvent<HTMLFormElement>) => {
+  const formSubmit = async (
+    ev: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
     ev.preventDefault();
 
     try {

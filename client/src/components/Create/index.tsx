@@ -5,18 +5,30 @@ import { QUERY } from "../../utils/queries";
 import { ADD_CLASSWORK, ADD_STUDENT } from "../../utils/mutations";
 import "./create.css";
 
-export const Create = () => {
+interface StudentData {
+  username: string;
+  password: string;
+  email: string;
+}
+
+interface AssignmentData {
+  name: string;
+  description: string;
+  kind: string;
+}
+
+export const Create = (): JSX.Element => {
   const { data, loading } = useQuery(QUERY);
   const [addStudent] = useMutation(ADD_STUDENT);
   const [addAssignment] = useMutation(ADD_CLASSWORK);
-  const [studentModal, setStudentModal] = useState(false);
-  const [assignmentModal, setAssignmentModal] = useState(false);
-  const [studentData, setStudentData] = useState({
+  const [studentModal, setStudentModal] = useState<boolean>(false);
+  const [assignmentModal, setAssignmentModal] = useState<boolean>(false);
+  const [studentData, setStudentData] = useState<StudentData>({
     username: "",
     password: "",
     email: "",
   });
-  const [assignmentData, setAssignmentData] = useState({
+  const [assignmentData, setAssignmentData] = useState<AssignmentData>({
     name: "",
     description: "",
     kind: "",
@@ -24,27 +36,27 @@ export const Create = () => {
   if (!data) return <h1>You need to login to use this</h1>;
   if (data.self.student) return <h1>Teacher access only</h1>;
   if (loading) return <h1>Loading</h1>;
-  const teacher = data.self.id;
 
-  const closeModal = () => {
+  const closeModal = (): void => {
     if (studentModal) setStudentModal(false);
     if (assignmentModal) setAssignmentModal(false);
   };
 
-  const addStudentM = () => {
+  const addStudentM = (): void => {
     setStudentModal(true);
   };
 
-  const addAssignmentM = () => {
+  const addAssignmentM = (): void => {
     setAssignmentModal(true);
   };
 
-  const studentChange = (ev: ChangeEvent<HTMLInputElement>) => {
+  const studentChange = (ev: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = ev.target;
     setStudentData({ ...studentData, [name]: value });
   };
 
-  const createStudent = async () => {
+  const createStudent = async (): Promise<void> => {
+    const teacher: string = data.self.id;
     try {
       const student = await addStudent({
         variables: { ...studentData, teacher },
@@ -64,7 +76,8 @@ export const Create = () => {
     setAssignmentData({ ...assignmentData, [name]: value });
   };
 
-  const createAssignment = async () => {
+  const createAssignment = async (): Promise<void> => {
+    const teacher: string = data.self.id;
     try {
       const assignment = await addAssignment({
         variables: { ...assignmentData, teacher },
@@ -144,11 +157,11 @@ export const Create = () => {
         </button>
       </Modal>
       <div className="create-container">
-        <div className="create">
-          <p onClick={addStudentM}>Add a new student</p>
+        <div className="create" onClick={addStudentM}>
+          <p>Add a new student</p>
         </div>
-        <div className="create">
-          <p onClick={addAssignmentM}>Add a new assignment</p>
+        <div className="create" onClick={addAssignmentM}>
+          <p>Add a new assignment</p>
         </div>
       </div>
     </Fragment>

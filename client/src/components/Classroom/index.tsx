@@ -28,7 +28,7 @@ export const Classroom = (props: any): JSX.Element => {
   const [peers, setPeers] = useState<any[]>([]);
   const socketRef = useRef<any>();
   const userVideo = useRef<any>();
-  const peersRef = useRef<peersRef[]>([]);
+  const peersRef = useRef<Array<peersRef>>([]);
   const roomID = props.match.params.roomID;
 
   useEffect(() => {

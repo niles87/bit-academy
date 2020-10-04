@@ -6,8 +6,14 @@ import { Welcome } from "../Welcome";
 import Auth from "../../utils/auth";
 import "./register.css";
 
+interface UserData {
+  username: string;
+  password: string;
+  email: string;
+}
+
 export const Register = () => {
-  const [userData, setUserData] = useState({
+  const [userData, setUserData] = useState<UserData>({
     username: "",
     password: "",
     email: "",
@@ -16,12 +22,14 @@ export const Register = () => {
 
   if (error) console.error(error);
 
-  const handleInputChange = (ev: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (ev: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = ev.target;
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleFormSubmit = async (ev: ChangeEvent<HTMLFormElement>) => {
+  const handleFormSubmit = async (
+    ev: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
     ev.preventDefault();
 
     try {

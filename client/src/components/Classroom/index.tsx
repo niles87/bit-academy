@@ -39,7 +39,7 @@ export const Classroom = (props: any): JSX.Element => {
         userVideo.current.srcObject = stream;
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users: any) => {
-          const peers: Peer.Instance[] = [];
+          const peerArr: Peer.Instance[] = [];
           users.forEach((userID: string) => {
             const peer: Peer.Instance = createPeer(
               userID,
@@ -50,9 +50,9 @@ export const Classroom = (props: any): JSX.Element => {
               peerID: userID,
               peer,
             });
-            peers.push(peer);
+            peerArr.push(peer);
           });
-          setPeers(peers);
+          setPeers(peerArr);
         });
 
         socketRef.current.on("user joined", (payload: joined) => {
@@ -79,6 +79,16 @@ export const Classroom = (props: any): JSX.Element => {
             (p: peersRef) => p.peerID === payload.id
           );
           if (item) item.peer.signal(payload.signal);
+        });
+
+        socketRef.current.on("user disconnect", (id: any) => {
+          console.log("peerRef", peersRef.current);
+          const peerObj = peersRef.current.find((p) => p.peerID === id);
+          if (peerObj) peerObj.peer.destroy();
+
+          const peersArr = peersRef.current.filter((p) => p.peerID !== id);
+          peersRef.current = peersArr;
+          setPeers(peersArr);
         });
       });
   }, []);
@@ -127,8 +137,8 @@ export const Classroom = (props: any): JSX.Element => {
   return (
     <div className="classroom">
       <div className="peerContainer">
-        {peers.map((peer: any, index: number) => {
-          return <Video key={index} peer={peer} />;
+        {peersRef.current.map((peer: any) => {
+          return <Video key={peer.peerID} peer={peer.peer} />;
         })}
       </div>
       <video

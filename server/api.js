@@ -50,6 +50,7 @@ io.on("connection", (socket) => {
       room = room.filter((id) => id !== socket.id);
       person[roomId] = room;
     }
+    socket.broadcast.emit("user disconnect", socket.id);
   });
 });
 

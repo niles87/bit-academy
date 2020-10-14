@@ -129,3 +129,20 @@ export const SUBMIT_CLASSWORK = gql`
     }
   }
 `;
+
+export const REMOVE_ASSIGNMENT = gql`
+  mutation deleteAssignment($teacher: ID!, $classworkId: ID!) {
+    deleteAssignment(teacher: $teacher, classworkId: $classworkId)
+  }
+`;
+
+export const REMOVE_STUDENT = gql`
+  mutation removeStudent($teacher: ID!, $studentEmail: String!) {
+    removeStudent(teacher: $teacher, studentEmail: $studentEmail) {
+      id
+      username
+      email
+      student
+    }
+  }
+`;

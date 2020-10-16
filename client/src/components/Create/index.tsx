@@ -3,6 +3,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Modal } from "../Modal";
 import { QUERY } from "../../utils/queries";
 import { ADD_CLASSWORK, ADD_STUDENT } from "../../utils/mutations";
+import { StatusMsg } from "../StatusMsg";
 import "./create.css";
 
 interface StudentData {
@@ -33,6 +34,9 @@ export const Create = (): JSX.Element => {
     description: "",
     kind: "",
   });
+  const [statMsgShow, setStatMsgShow] = useState<boolean>(false);
+  const [statMsgSuccess, setStatMsgSuccess] = useState<boolean>(false);
+  const [msg, setMsg] = useState<string>("");
   if (!data) return <h1>You need to login to use this</h1>;
   if (data.self.student) return <h1>Teacher access only</h1>;
   if (loading) return <h1>Loading</h1>;
@@ -40,6 +44,12 @@ export const Create = (): JSX.Element => {
   const closeModal = (): void => {
     if (studentModal) setStudentModal(false);
     if (assignmentModal) setAssignmentModal(false);
+  };
+
+  const closeStatusMsg = (): void => {
+    setStatMsgShow(false);
+    setStatMsgSuccess(false);
+    setMsg("");
   };
 
   const addStudentM = (): void => {
@@ -61,9 +71,18 @@ export const Create = (): JSX.Element => {
       const student = await addStudent({
         variables: { ...studentData, teacher },
       });
-      console.log(student);
-    } catch (error) {
-      console.error(error);
+      if (student) {
+        setMsg("Success Added Student");
+        setStatMsgSuccess(true);
+        setStatMsgShow(true);
+      }
+    } catch (err) {
+      console.error(err);
+      if (err) {
+        setMsg("Something Went Wrong");
+        setStatMsgSuccess(false);
+        setStatMsgShow(true);
+      }
     }
     setStudentData({ username: "", password: "", email: "" });
     closeModal();
@@ -82,16 +101,35 @@ export const Create = (): JSX.Element => {
       const assignment = await addAssignment({
         variables: { ...assignmentData, teacher },
       });
-      console.log(assignment);
-    } catch (error) {
-      console.error(error);
+      if (assignment) {
+        setMsg("Success Added Assignment");
+        setStatMsgSuccess(true);
+        setStatMsgShow(true);
+      }
+    } catch (err) {
+      console.error(err.message);
+      if (err) {
+        setMsg("Something Went Wrong");
+        setStatMsgSuccess(false);
+        setStatMsgShow(true);
+      }
     }
     setAssignmentData({ name: "", description: "", kind: "" });
     closeModal();
   };
 
+  if (statMsgShow) {
+    setTimeout(closeStatusMsg, 6000);
+  }
+
   return (
     <Fragment>
+      <StatusMsg
+        show={statMsgShow}
+        success={statMsgSuccess}
+        msg={msg}
+        handleClose={closeStatusMsg}
+      />
       <Modal show={studentModal} handleClose={closeModal}>
         <div>
           <input

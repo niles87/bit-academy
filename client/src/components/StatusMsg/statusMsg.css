@@ -1,0 +1,29 @@
+.status-msg {
+  padding: 1rem;
+  position: fixed;
+  bottom: 15%;
+  left: 50%;
+  transform: translate(-50%, -85%);
+  border-radius: 10px;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 15px;
+}
+
+.success {
+  background-color: #008a00;
+}
+
+.error {
+  background-color: #e00b0b;
+}
+
+.active-msg {
+  display: block;
+}
+
+.hide-msg {
+  display: none;
+}

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { LOGIN } from "../../utils/mutations";
 import { Welcome } from "../Welcome";
 import Auth from "../../utils/auth";
+import { StatusMsg } from "../StatusMsg";
 import "./login.css";
 
 interface UserData {
@@ -17,8 +18,17 @@ export const Login = () => {
     password: "",
   });
   const [login, { error }] = useMutation(LOGIN);
+  const [statMsgShow, setStatMsgShow] = useState<boolean>(false);
+  const [statMsgSuccess, setStatMsgSuccess] = useState<boolean>(false);
+  const [msg, setMsg] = useState<string>("");
 
   if (error) console.error(error);
+
+  const closeStatusMsg = (): void => {
+    setStatMsgShow(false);
+    setStatMsgSuccess(false);
+    setMsg("");
+  };
 
   const handleInputChange = (ev: ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = ev.target;
@@ -37,7 +47,11 @@ export const Login = () => {
         window.location.assign("/home");
       }
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
+      if (err) {
+        setMsg("Something Went Wrong");
+        setStatMsgShow(true);
+      }
     }
 
     setUserData({ email: "", password: "" });
@@ -48,8 +62,18 @@ export const Login = () => {
     ? (valid = true)
     : (valid = false);
 
+  if (statMsgShow) {
+    setTimeout(closeStatusMsg, 6000);
+  }
+
   return (
     <Welcome>
+      <StatusMsg
+        show={statMsgShow}
+        success={statMsgSuccess}
+        msg={msg}
+        handleClose={closeStatusMsg}
+      />
       <div className="login">
         <h3>Login</h3>
         <form onSubmit={formSubmit}>

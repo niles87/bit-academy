@@ -8,8 +8,7 @@
 }
 
 .create {
-  width: 20%;
-  height: 15%;
+  padding: 1rem;
   border: #444 solid 2px;
   border-radius: 5px;
   display: flex;

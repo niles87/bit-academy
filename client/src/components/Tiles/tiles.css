@@ -10,7 +10,7 @@
 .tile-link {
   text-decoration: none;
   font-weight: 500;
-  color: red;
+  color: #444;
   font-size: 20px;
 }
 
@@ -23,4 +23,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: 0.5s;
+}
+
+.tile-link .tile:hover {
+  box-shadow: 0 0 3px 3px #444;
 }

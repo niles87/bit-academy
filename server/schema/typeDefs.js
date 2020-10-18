@@ -49,8 +49,8 @@ const typeDefs = gql`
     ): Boolean
     gradeAssignment(username: String!, grade: Int!, classworkId: ID!): User
     findAllStudents(teacher: ID!): [User]
-    deleteAssignment(teacher: ID!, classworkId: ID!): Boolean
-    removeStudent(teacher: ID!, studentEmail: String!): User
+    deleteAssignment(teacher: ID!, name: String!): Boolean
+    removeStudent(teacher: ID!, studentEmail: String!): Boolean
     # student mutations
     submitClasswork(id: ID!, classworkId: ID!, link: String!): User
     checkIn(id: ID!): User

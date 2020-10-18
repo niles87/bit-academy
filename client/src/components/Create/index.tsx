@@ -2,7 +2,12 @@ import React, { ChangeEvent, Fragment, useState } from "react";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { Modal } from "../Modal";
 import { QUERY } from "../../utils/queries";
-import { ADD_CLASSWORK, ADD_STUDENT } from "../../utils/mutations";
+import {
+  ADD_CLASSWORK,
+  ADD_STUDENT,
+  REMOVE_ASSIGNMENT,
+  REMOVE_STUDENT,
+} from "../../utils/mutations";
 import { StatusMsg } from "../StatusMsg";
 import "./create.css";
 
@@ -22,8 +27,12 @@ export const Create = (): JSX.Element => {
   const { data, loading } = useQuery(QUERY);
   const [addStudent] = useMutation(ADD_STUDENT);
   const [addAssignment] = useMutation(ADD_CLASSWORK);
+  const [removeAssignment] = useMutation(REMOVE_ASSIGNMENT);
+  const [removeStudent] = useMutation(REMOVE_STUDENT);
   const [studentModal, setStudentModal] = useState<boolean>(false);
   const [assignmentModal, setAssignmentModal] = useState<boolean>(false);
+  const [rmStudentModal, setRMStudentModal] = useState<boolean>(false);
+  const [rmAssignmentModal, setRMAssignmentModal] = useState<boolean>(false);
   const [studentData, setStudentData] = useState<StudentData>({
     username: "",
     password: "",
@@ -44,6 +53,8 @@ export const Create = (): JSX.Element => {
   const closeModal = (): void => {
     if (studentModal) setStudentModal(false);
     if (assignmentModal) setAssignmentModal(false);
+    if (rmAssignmentModal) setRMAssignmentModal(false);
+    if (rmStudentModal) setRMStudentModal(false);
   };
 
   const closeStatusMsg = (): void => {
@@ -58,6 +69,14 @@ export const Create = (): JSX.Element => {
 
   const addAssignmentM = (): void => {
     setAssignmentModal(true);
+  };
+
+  const deleteStudentM = (): void => {
+    setRMStudentModal(true);
+  };
+
+  const deleteAssignmentM = (): void => {
+    setRMAssignmentModal(true);
   };
 
   const studentChange = (ev: ChangeEvent<HTMLInputElement>): void => {
@@ -115,6 +134,52 @@ export const Create = (): JSX.Element => {
       }
     }
     setAssignmentData({ name: "", description: "", kind: "" });
+    closeModal();
+  };
+
+  const deleteAssignment = async () => {
+    const teacher: string = data.self.id;
+    try {
+      const assignment = await removeAssignment({
+        variables: { teacher, name: assignmentData.name },
+      });
+      if (assignment) {
+        setMsg("Success Removed Assignment");
+        setStatMsgSuccess(true);
+        setStatMsgShow(true);
+      }
+    } catch (err) {
+      console.error(err.message);
+      if (err) {
+        setMsg("Something Went Wrong");
+        setStatMsgSuccess(false);
+        setStatMsgShow(true);
+      }
+    }
+    setAssignmentData({ name: "", description: "", kind: "" });
+    closeModal();
+  };
+
+  const deleteStudent = async () => {
+    const teacher: string = data.self.id;
+    try {
+      const student = await removeStudent({
+        variables: { teacher, studentEmail: studentData.email },
+      });
+      if (student) {
+        setMsg("Success Removed Student");
+        setStatMsgSuccess(true);
+        setStatMsgShow(true);
+      }
+    } catch (err) {
+      console.error(err.message);
+      if (err) {
+        setMsg("Something Went Wrong");
+        setStatMsgSuccess(false);
+        setStatMsgShow(true);
+      }
+    }
+    setStudentData({ username: "", password: "", email: "" });
     closeModal();
   };
 
@@ -194,12 +259,55 @@ export const Create = (): JSX.Element => {
           Add Assignment
         </button>
       </Modal>
-      <div className="create-container">
-        <div className="create" onClick={addStudentM}>
-          <p>Add a new student</p>
+      <Modal show={rmAssignmentModal} handleClose={closeModal}>
+        <div>
+          <input
+            type="text"
+            name="name"
+            onChange={assignmentChange}
+            placeholder="Assignment Name"
+          />
         </div>
-        <div className="create" onClick={addAssignmentM}>
-          <p>Add a new assignment</p>
+        <button
+          onClick={deleteAssignment}
+          disabled={assignmentData.name === "" ? true : false}
+        >
+          Delete Assignment
+        </button>
+      </Modal>
+      <Modal show={rmStudentModal} handleClose={closeModal}>
+        <div>
+          <input
+            type="email"
+            name="email"
+            onChange={studentChange}
+            placeholder="Student Email"
+          />
+        </div>
+        <button
+          onClick={deleteStudent}
+          disabled={studentData.email === "" ? true : false}
+        >
+          Delete Student
+        </button>
+      </Modal>
+
+      <div>
+        <div className="create-container">
+          <div className="create" onClick={addStudentM}>
+            <p>Add a new student</p>
+          </div>
+          <div className="create" onClick={addAssignmentM}>
+            <p>Add a new assignment</p>
+          </div>
+        </div>
+        <div className="delete-container">
+          <div className="delete" onClick={deleteStudentM}>
+            <p>Remove a student</p>
+          </div>
+          <div className="delete" onClick={deleteAssignmentM}>
+            <p>Remove an assignment</p>
+          </div>
         </div>
       </div>
     </Fragment>

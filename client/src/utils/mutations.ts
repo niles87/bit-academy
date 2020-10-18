@@ -49,6 +49,12 @@ export const ADD_STUDENT = gql`
   }
 `;
 
+export const REMOVE_STUDENT = gql`
+  mutation removeStudent($teacher: ID!, $studentEmail: String!) {
+    removeStudent(teacher: $teacher, studentEmail: $studentEmail)
+  }
+`;
+
 export const ADD_CLASSWORK = gql`
   mutation addClasswork(
     $teacher: ID!
@@ -62,6 +68,12 @@ export const ADD_CLASSWORK = gql`
       description: $description
       kind: $kind
     )
+  }
+`;
+
+export const REMOVE_ASSIGNMENT = gql`
+  mutation deleteAssignment($teacher: ID!, $name: String!) {
+    deleteAssignment(teacher: $teacher, name: $name)
   }
 `;
 
@@ -126,23 +138,6 @@ export const SUBMIT_CLASSWORK = gql`
       }
       classworkList
       teacher
-    }
-  }
-`;
-
-export const REMOVE_ASSIGNMENT = gql`
-  mutation deleteAssignment($teacher: ID!, $classworkId: ID!) {
-    deleteAssignment(teacher: $teacher, classworkId: $classworkId)
-  }
-`;
-
-export const REMOVE_STUDENT = gql`
-  mutation removeStudent($teacher: ID!, $studentEmail: String!) {
-    removeStudent(teacher: $teacher, studentEmail: $studentEmail) {
-      id
-      username
-      email
-      student
     }
   }
 `;

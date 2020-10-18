@@ -112,10 +112,10 @@ const resolvers = {
       return students;
     },
     deleteAssignment: async (parent, args) => {
-      const { teacher, classworkId } = args;
+      const { teacher, name } = args;
       const remove = await User.updateMany(
         { student: true, teacher },
-        { $pull: { classwork: { _id: { $eq: classworkId } } } }
+        { $pull: { classwork: { name: { $eq: name } } } }
       );
       if (remove.n === remove.nModified) {
         return true;
@@ -125,9 +125,14 @@ const resolvers = {
     },
     removeStudent: async (parent, args) => {
       const { teacher, studentEmail } = args;
+
       const student = await User.deleteOne({ teacher, email: studentEmail });
 
-      return student;
+      if (student.deletedCount === 1) {
+        return true;
+      } else {
+        return false;
+      }
     },
     // Student Mutations
     submitClasswork: async (parent, args) => {

@@ -22,16 +22,16 @@ class AuthService {
   }
 
   getToken(): string {
-    const token = localStorage.getItem("id");
+    const token = sessionStorage.getItem("id");
     return token ? token : "";
   }
 
   login(token: string): void {
-    localStorage.setItem("id", token);
+    sessionStorage.setItem("id", token);
   }
 
   logout(): void {
-    localStorage.removeItem("id");
+    sessionStorage.removeItem("id");
   }
 }
 

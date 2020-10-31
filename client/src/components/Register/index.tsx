@@ -82,7 +82,7 @@ export const Register = () => {
               type="text"
               name="username"
               onChange={handleInputChange}
-              placeholder="username"
+              placeholder="Username"
             />
           </div>
           <div>
@@ -106,7 +106,7 @@ export const Register = () => {
           </button>
         </form>
         <div>
-          <p>
+          <p className="signup-link">
             Already registered?{" "}
             <Link className="link" to="/">
               <span>Log in</span>

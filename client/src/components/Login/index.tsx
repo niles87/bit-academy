@@ -98,7 +98,7 @@ export const Login = () => {
           </button>
         </form>
         <div>
-          <p>
+          <p className="signup-link">
             New Teacher?{" "}
             <Link className="link" to="/register">
               <span>Sign up</span>

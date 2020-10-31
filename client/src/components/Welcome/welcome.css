@@ -2,8 +2,15 @@
   margin: 0;
   width: 100vw;
   height: 100vh;
+  background: url("./pexels-dids-2675061.jpg") center;
+  background-size: cover;
 }
 
 .welcome h1 {
   font-size: 50px;
+}
+
+.welcome h3,
+.welcome h1 {
+  color: #fff;
 }

@@ -14,23 +14,26 @@
 }
 
 .login form {
-  width: 50%;
+  padding: 10px;
   margin: 0 auto 5px;
-  border: solid 2px #444;
+  border: solid 2px #fff;
   border-radius: 10px;
+  background: #0000003d;
 }
 
 .login form input {
   border-top: none;
   border-left: none;
   border-right: none;
-  border-color: #444;
+  border-color: #ddd;
+  color: #fff;
   margin-bottom: 5px;
+  background-color: transparent;
 }
 
 .login form input:focus,
 .login form button:focus {
-  outline: 2px dashed #2b85cf;
+  outline: 2px solid #999999;
   outline-offset: 2px;
 }
 
@@ -45,8 +48,18 @@
 
 .link {
   text-decoration: none;
+  color: #1900a5;
 }
 
 .link span {
   font-weight: bolder;
+}
+
+.signup-link {
+  color: #fff;
+  background: #0000003d;
+  border-radius: 5px;
+  padding: 3px;
+  width: fit-content;
+  margin: 5px auto;
 }

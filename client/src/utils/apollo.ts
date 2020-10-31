@@ -9,7 +9,7 @@ const link = createHttpLink({
 const cache = new InMemoryCache();
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem("id");
+  const token = sessionStorage.getItem("id");
   return {
     headers: {
       ...headers,

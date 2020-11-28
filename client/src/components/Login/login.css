@@ -39,7 +39,7 @@
 
 .login form button {
   color: #ffffff;
-  background-color: #0000ff;
+  background-color: #008127;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
@@ -48,7 +48,7 @@
 
 .link {
   text-decoration: none;
-  color: #1900a5;
+  color: #98d4c0;
 }
 
 .link span {
@@ -57,9 +57,9 @@
 
 .signup-link {
   color: #fff;
-  background: #0000003d;
+  background: #0000003f;
   border-radius: 5px;
-  padding: 3px;
+  padding: 2px;
   width: fit-content;
   margin: 5px auto;
 }

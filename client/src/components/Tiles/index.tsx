@@ -26,11 +26,15 @@ export const Tiles = (props: any) => {
             key={tile.name}
             className="tile-link"
           >
-            <div className="tile">{tile.name}</div>
+            <div className="tile" id={tile.name}>
+              <span>{tile.name}</span>
+            </div>
           </Link>
         ) : (
           <Link to={tile.url} key={tile.name} className="tile-link">
-            <div className="tile">{tile.name}</div>
+            <div className="tile" id={tile.name}>
+              <span>{tile.name}</span>
+            </div>
           </Link>
         )
       )}

@@ -33,7 +33,7 @@
 
 .register form button {
   color: #ffffff;
-  background-color: #0000ff;
+  background-color: #008127;
   padding: 5px;
   margin: 5px;
   border-radius: 5px;
@@ -42,6 +42,6 @@
 
 .register form input:focus,
 .register form button:focus {
-  outline: 2px dashed #2b85cf;
+  outline: 2px solid #999999;
   outline-offset: 2px;
 }

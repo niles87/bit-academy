@@ -10,7 +10,6 @@
 .tile-link {
   text-decoration: none;
   font-weight: 500;
-  color: #444;
   font-size: 20px;
 }
 
@@ -26,6 +25,25 @@
   transition: 0.5s;
 }
 
+.tile span {
+  border-radius: 10px;
+  padding: 2px;
+  background-color: #0000005d;
+  color: #eee;
+}
+
 .tile-link .tile:hover {
   box-shadow: 0 0 3px 3px #444;
+}
+
+#Assignments {
+  background: url("./pexels-olia-danilevich-5088021.jpg") center;
+}
+
+#Classroom {
+  background: url("./pexels-pixabay-256395.jpg") center;
+}
+
+#Create {
+  background: url("./pexels-kaboompics-com-6375.jpg") center;
 }

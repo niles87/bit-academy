@@ -1,11 +1,12 @@
 import React, { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/react-hooks";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { LOGIN } from "../../utils/mutations";
 import { Welcome } from "../Welcome";
 import Auth from "../../utils/auth";
 import { StatusMsg } from "../StatusMsg";
 import "./login.css";
+
 
 interface UserData {
   email: string;
@@ -21,7 +22,7 @@ export const Login = () => {
   const [statMsgShow, setStatMsgShow] = useState<boolean>(false);
   const [statMsgSuccess, setStatMsgSuccess] = useState<boolean>(false);
   const [msg, setMsg] = useState<string>("");
-
+  let navigate = useNavigate();
   if (error) console.error(error);
 
   const closeStatusMsg = (): void => {
@@ -44,9 +45,9 @@ export const Login = () => {
       const { data } = await login({ variables: { ...userData } });
       Auth.login(data.login.token);
       if (Auth.getToken().length > 1) {
-        window.location.assign("/home");
+        navigate('/dashboard', {replace: true});
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");

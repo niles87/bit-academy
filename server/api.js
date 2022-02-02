@@ -54,13 +54,18 @@ io.on("connection", (socket) => {
   });
 });
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleWare,
-});
+const startServer = async () => {
+  const server = new ApolloServer({
+    typeDefs,
+    resolvers,
+    context: authMiddleWare,
+  });
+  await server.start();
+  server.applyMiddleware({ app });
+  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+};
 
-server.applyMiddleware({ app });
+startServer();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -69,13 +74,12 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("../client/build"));
 }
 
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
-});
+// app.get("*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "client", "build", "index.html"));
+// });
 
 db.on("connected", () => {
   http.listen(PORT, () => {
     console.log(`api running on http://localhost:${PORT}`);
-    console.log(`http://localhost:${PORT}${server.graphqlPath}`);
   });
 });

@@ -1,14 +1,14 @@
 [
   {
     "name": "Assignments",
-    "url": "/assignments"
+    "url": "/dashboard/assignments"
   },
   {
     "name": "Classroom",
-    "url": "/classroom"
+    "url": "/dashboard/classroom"
   },
   {
     "name": "Create",
-    "url": "/create"
+    "url": "/dashboard/create"
   }
 ]

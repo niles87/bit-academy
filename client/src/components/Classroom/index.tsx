@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 import Peer, { SignalData } from "simple-peer";
 import "./classroom.css";
@@ -29,14 +30,15 @@ export const Classroom = (props: any): JSX.Element => {
   const socketRef = useRef<any>();
   const userVideo = useRef<any>();
   const peersRef = useRef<Array<peersRef>>([]);
-  const roomID = props.match.params.roomID;
+  const { id: roomID } = useParams<"id">();
 
   useEffect(() => {
+    const videoEl = userVideo.current;
     socketRef.current = io.connect("/");
     navigator.mediaDevices
       .getUserMedia({ video: true, audio: true })
       .then((stream) => {
-        userVideo.current.srcObject = stream;
+        videoEl.srcObject = stream;
         socketRef.current.emit("join room", roomID);
         socketRef.current.on("all users", (users: any) => {
           const peerArr: Peer.Instance[] = [];
@@ -91,6 +93,13 @@ export const Classroom = (props: any): JSX.Element => {
           setPeers(peersArr);
         });
       });
+    return () => {
+      const tracks = videoEl.srcObject.getTracks();
+      socketRef.current.disconnect();
+      tracks.forEach((track: MediaStreamTrack) => {
+        track.stop();
+      });
+    };
   }, []);
 
   const createPeer = (

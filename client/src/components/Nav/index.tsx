@@ -1,20 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Auth from "../../utils/auth";
 import "./nav.css";
 
 export const Nav = () => {
+  let nav = useNavigate();
   return (
     <nav>
       <ul>
         <li>
-          <Link className="navLink" to="/home">
+          <Link className="navLink" to="/dashboard">
             Home
           </Link>
           |
         </li>
         <li>
-          <Link className="navLink" to="/assignments">
+          <Link className="navLink" to="/dashboard/assignments">
             Assignments
           </Link>
           |
@@ -25,7 +26,7 @@ export const Nav = () => {
             href="/"
             onClick={() => {
               Auth.logout();
-              window.location.assign("/");
+              nav("/", { replace: true });
             }}
           >
             Logout

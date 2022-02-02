@@ -49,7 +49,7 @@ export const Register = () => {
         setMsg("Registered Successfully");
         setStatMsgShow(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");

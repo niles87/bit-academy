@@ -1,5 +1,9 @@
 import React, { Fragment } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes as Switch,
+} from "react-router-dom";
 import { Assignments } from "./components/Assignments";
 import { Home } from "./components/Home";
 import { Login } from "./components/Login";
@@ -16,10 +20,12 @@ function App() {
     <Fragment>
       <Nav />
       <Container>
-        <Route exact path="/assignments" component={Assignments} />
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/create" component={Create} />
-        <Route path="/classroom/:roomId" component={Classroom} />
+        <Switch>
+          <Route index element={<Home />} />
+          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/classroom/:roomId" element={<Classroom />} />
+        </Switch>
       </Container>
       <Footer />
     </Fragment>
@@ -29,9 +35,9 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route component={Default} />
+          <Route path="/" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="dashboard/*" element={<Default />} />
         </Switch>
       </div>
     </Router>

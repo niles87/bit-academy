@@ -95,7 +95,7 @@ export const Create = (): JSX.Element => {
         setStatMsgSuccess(true);
         setStatMsgShow(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
       if (err) {
         setMsg("Something Went Wrong");
@@ -125,7 +125,7 @@ export const Create = (): JSX.Element => {
         setStatMsgSuccess(true);
         setStatMsgShow(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");
@@ -148,7 +148,7 @@ export const Create = (): JSX.Element => {
         setStatMsgSuccess(true);
         setStatMsgShow(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");
@@ -171,7 +171,7 @@ export const Create = (): JSX.Element => {
         setStatMsgSuccess(true);
         setStatMsgShow(true);
       }
-    } catch (err) {
+    } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");

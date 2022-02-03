@@ -28,21 +28,35 @@
   display: none;
 }
 
-.modal-main input {
+.modal-main form {
+  margin-top: 20px;
+}
+
+.modal-main form div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-main form label {
+  margin-right: 5px;
+}
+
+.modal-main form input {
   border-top: none;
   border-left: none;
   border-right: none;
   border-color: #444;
   margin-bottom: 15px;
+  margin-right: 10px;
 }
 
-.modal-main select {
+.modal-main form select {
   border-color: #444;
   border-radius: 5px;
   margin-bottom: 15px;
 }
 
-.modal-main button {
+.modal-main form button {
   margin: 5px;
   padding: 5px;
   background-color: #004b0c;
@@ -52,19 +66,22 @@
   cursor: pointer;
 }
 
-.modal-main .cancel {
-  background-color: #a81111;
+.modal-main form button:disabled {
+  background-color: #999;
+  color: #000;
+  cursor: not-allowed;
 }
 
 .modal-close {
+  margin: 0 3px 3px 0;
+  padding: 5px;
   background-color: transparent !important;
-  border-color: #444 !important;
-  border-width: 1px;
-  box-shadow: 2px 2px 2px #333;
+  border: none;
   width: fit-content !important;
   position: absolute;
   top: 0%;
   right: 0%;
+  cursor: pointer;
 }
 
 .modal-close::before {

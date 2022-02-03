@@ -21,6 +21,16 @@
   background: #0000003d;
 }
 
+.login form div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login form label {
+  color: #fff;
+  margin-right: 5px;
+}
+
 .login form input {
   border-top: none;
   border-left: none;

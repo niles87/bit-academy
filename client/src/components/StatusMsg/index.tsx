@@ -20,6 +20,7 @@ export const StatusMsg = (props: snacks) => {
     <div
       className={statusShow + " " + statusMsgClass}
       onClick={props.handleClose}
+      aria-live="polite"
     >
       <p>{props.msg}</p>
     </div>

@@ -7,7 +7,6 @@ import Auth from "../../utils/auth";
 import { StatusMsg } from "../StatusMsg";
 import "./login.css";
 
-
 interface UserData {
   email: string;
   password: string;
@@ -45,7 +44,7 @@ export const Login = () => {
       const { data } = await login({ variables: { ...userData } });
       Auth.login(data.login.token);
       if (Auth.getToken().length > 1) {
-        navigate('/dashboard', {replace: true});
+        navigate("/dashboard", { replace: true });
       }
     } catch (err: any) {
       console.error(err.message);
@@ -76,25 +75,35 @@ export const Login = () => {
         handleClose={closeStatusMsg}
       />
       <div className="login">
-        <h3>Login</h3>
-        <form onSubmit={formSubmit}>
+        <h3 id="login_form">Login</h3>
+        <form onSubmit={formSubmit} aria-labelledby="login_form">
           <div>
+            <label htmlFor="login_email">
+              Email <span aria-hidden="true">(required)</span>
+            </label>
             <input
               type="email"
               name="email"
+              id="login_email"
               onChange={handleInputChange}
-              placeholder="Email"
+              aria-required="true"
+              required
             />
           </div>
           <div>
+            {/* need better contrast for labels */}
+            <label htmlFor="login_password">
+              Password <span aria-hidden="true">(required)</span>
+            </label>
             <input
               type="password"
               name="password"
               onChange={handleInputChange}
-              placeholder="Password"
+              aria-required="true"
+              required
             />
           </div>
-          <button type="submit" disabled={valid}>
+          <button type="submit" disabled={valid} aria-disabled={valid}>
             Login
           </button>
         </form>
@@ -103,6 +112,7 @@ export const Login = () => {
             New Teacher?{" "}
             <Link className="link" to="/register">
               <span>Sign up</span>
+              <span className="sr-only">, page</span>
             </Link>{" "}
             here.
           </p>

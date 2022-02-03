@@ -15,6 +15,9 @@
   transform: translate(-50%, -50%);
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 2px 2px 2px #555;
+  border-width: 1px;
+  border-color: #444;
 }
 
 .active {
@@ -51,4 +54,19 @@
 
 .modal-main .cancel {
   background-color: #a81111;
+}
+
+.modal-close {
+  background-color: transparent !important;
+  border-color: #444 !important;
+  border-width: 1px;
+  box-shadow: 2px 2px 2px #333;
+  width: fit-content !important;
+  position: absolute;
+  top: 0%;
+  right: 0%;
+}
+
+.modal-close::before {
+  content: "❌ ";
 }

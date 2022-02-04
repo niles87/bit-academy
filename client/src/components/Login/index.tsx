@@ -75,8 +75,8 @@ export const Login = () => {
         handleClose={closeStatusMsg}
       />
       <div className="login">
-        <h3 id="login_form">Login</h3>
         <form onSubmit={formSubmit} aria-labelledby="login_form">
+          <h3 id="login_form">Login</h3>
           <div>
             <label htmlFor="login_email">
               Email <span aria-hidden="true">(required)</span>
@@ -106,17 +106,17 @@ export const Login = () => {
           <button type="submit" disabled={valid} aria-disabled={valid}>
             Login
           </button>
+          <div>
+            <p className="signup-link">
+              New Teacher?{" "}
+              <Link className="link" to="/register">
+                <span>Sign up</span>
+                <span className="sr-only">, page</span>
+              </Link>{" "}
+              here.
+            </p>
+          </div>
         </form>
-        <div>
-          <p className="signup-link">
-            New Teacher?{" "}
-            <Link className="link" to="/register">
-              <span>Sign up</span>
-              <span className="sr-only">, page</span>
-            </Link>{" "}
-            here.
-          </p>
-        </div>
       </div>
     </Welcome>
   );

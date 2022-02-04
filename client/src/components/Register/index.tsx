@@ -75,8 +75,8 @@ export const Register = () => {
         handleClose={closeStatusMsg}
       />
       <div className="register">
-        <h3 id="register_form">Register</h3>
         <form onSubmit={handleFormSubmit} aria-labelledby="register_form">
+          <h3 id="register_form">Register</h3>
           <div>
             <label htmlFor="username">
               Username <span aria-hidden="true">(required)</span>
@@ -119,17 +119,17 @@ export const Register = () => {
           <button type="submit" disabled={valid} aria-disabled={valid}>
             Register
           </button>
+          <div>
+            <p className="signup-link">
+              Already registered?{" "}
+              <Link className="link" to="/">
+                <span>Log in</span>
+                <span className="sr-only">, page</span>
+              </Link>{" "}
+              here.
+            </p>
+          </div>
         </form>
-        <div>
-          <p className="signup-link">
-            Already registered?{" "}
-            <Link className="link" to="/">
-              <span>Log in</span>
-              <span className="sr-only">, page</span>
-            </Link>{" "}
-            here.
-          </p>
-        </div>
       </div>
     </Welcome>
   );

@@ -75,33 +75,48 @@ export const Register = () => {
         handleClose={closeStatusMsg}
       />
       <div className="register">
-        <h3>Register</h3>
-        <form onSubmit={handleFormSubmit}>
+        <h3 id="register_form">Register</h3>
+        <form onSubmit={handleFormSubmit} aria-labelledby="register_form">
           <div>
+            <label htmlFor="username">
+              Username <span aria-hidden="true">(required)</span>
+            </label>
             <input
               type="text"
               name="username"
+              id="username"
               onChange={handleInputChange}
-              placeholder="Username"
+              aria-required="true"
+              required
             />
           </div>
           <div>
+            <label htmlFor="email">
+              Email <span aria-hidden="true">(required)</span>
+            </label>
             <input
               type="email"
               name="email"
+              id="email"
               onChange={handleInputChange}
-              placeholder="Email"
+              aria-required="true"
+              required
             />
           </div>
           <div>
+            <label htmlFor="password">
+              Password <span aria-hidden="true">(required)</span>
+            </label>
             <input
               type="password"
               name="password"
+              id="password"
               onChange={handleInputChange}
-              placeholder="Password"
+              aria-required="true"
+              required
             />
           </div>
-          <button type="submit" disabled={valid}>
+          <button type="submit" disabled={valid} aria-disabled={valid}>
             Register
           </button>
         </form>
@@ -110,6 +125,7 @@ export const Register = () => {
             Already registered?{" "}
             <Link className="link" to="/">
               <span>Log in</span>
+              <span className="sr-only">, page</span>
             </Link>{" "}
             here.
           </p>

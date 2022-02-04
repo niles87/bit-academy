@@ -6,7 +6,7 @@ import "./nav.css";
 export const Nav = () => {
   let nav = useNavigate();
   return (
-    <nav>
+    <nav aria-label="Main">
       <ul>
         <li>
           <Link className="navLink" to="/dashboard">

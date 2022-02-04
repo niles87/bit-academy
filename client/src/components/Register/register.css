@@ -21,6 +21,16 @@
   background: #0000003d;
 }
 
+.register form div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.register form label {
+  color: #fff;
+  margin-right: 5px;
+}
+
 .register form input {
   border-top: none;
   border-left: none;

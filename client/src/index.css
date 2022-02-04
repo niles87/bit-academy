@@ -19,3 +19,12 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+}

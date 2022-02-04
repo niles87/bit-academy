@@ -47,7 +47,10 @@ export const Student = (props: any) => {
     setLink(value);
   };
 
-  const updateLink = async (): Promise<void> => {
+  const updateLink = async (
+    ev: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
+    ev.preventDefault();
     try {
       await sendLink({ variables: { id, classworkId: assignId, link } });
     } catch (error) {
@@ -59,16 +62,18 @@ export const Student = (props: any) => {
 
   return (
     <Fragment>
-      <Modal show={showModal} handleClose={closeModal}>
-        <div>
-          <input
-            type="text"
-            name="link"
-            onChange={handleInput}
-            placeholder="Link"
-          />
-        </div>
-        <button onClick={updateLink}>Update Link</button>
+      <Modal
+        show={showModal}
+        handleClose={closeModal}
+        label={"Add Assignment Link"}
+      >
+        <form onSubmit={updateLink}>
+          <div>
+            <label htmlFor="link">Link</label>
+            <input type="text" name="link" id="link" onChange={handleInput} />
+          </div>
+          <button>Update Link</button>
+        </form>
       </Modal>
       <table className="assignments">
         <caption>Assignments</caption>
@@ -154,7 +159,10 @@ export const Teacher = (props: any) => {
     setGrade(parseInt(value));
   };
 
-  const updateGrade = async (): Promise<void> => {
+  const updateGrade = async (
+    ev: ChangeEvent<HTMLFormElement>
+  ): Promise<void> => {
+    ev.preventDefault();
     try {
       await sendGrade({
         variables: { username: studentName, grade, classworkId: assignId },
@@ -172,16 +180,21 @@ export const Teacher = (props: any) => {
 
   return (
     <Fragment>
-      <Modal show={showModal} handleClose={closeModal}>
-        <input
-          type="number"
-          name="grade"
-          onChange={handleInput}
-          placeholder="Grade%"
-          min={0}
-          max={100}
-        />
-        <button onClick={updateGrade}>Update Grade</button>
+      <Modal show={showModal} handleClose={closeModal} label={"Enter Grade"}>
+        <form onSubmit={updateGrade}>
+          <div>
+            <label htmlFor="grade">Grade 0 to 100%</label>
+            <input
+              type="number"
+              name="grade"
+              id="grade"
+              onChange={handleInput}
+              min={0}
+              max={100}
+            />
+          </div>
+          <button type="submit">Update Grade</button>
+        </form>
       </Modal>
       <table className="assignments">
         <caption>Assignments</caption>

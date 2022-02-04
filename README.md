@@ -1,6 +1,8 @@
 # bit-academy
 
-New and improved Bit Academy site, took the time to trim off a lot of fat from class components to decrease load times in Heroku.
+New and improved Bit Academy site.
+
+![Splash Screen](./images/bit-academy.png)
 
 Check out the deployed [app](https://bit-academy.herokuapp.com)
 

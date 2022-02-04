@@ -10,13 +10,13 @@
 }
 
 .register h3 {
-  margin: 10px;
+  margin-bottom: 10px;
 }
 
 .register form {
   padding: 10px;
   margin: 0 auto 5px;
-  border: solid 2px #444;
+  border: solid 2px #fff;
   border-radius: 10px;
   background: #0000003d;
 }

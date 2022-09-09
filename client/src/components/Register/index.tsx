@@ -47,12 +47,14 @@ export const Register = () => {
       Auth.login(data.addTeacher.token);
       if (data) {
         setMsg("Registered Successfully");
+        setStatMsgSuccess(true)
         setStatMsgShow(true);
       }
     } catch (err: any) {
       console.error(err.message);
       if (err) {
         setMsg("Something Went Wrong");
+        setStatMsgSuccess(false)
         setStatMsgShow(true);
       }
     }

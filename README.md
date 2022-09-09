@@ -12,9 +12,9 @@ A Web Resource for the Education System. With Bit Academy we aim to deliver a ro
 
 ## Technology Used
 
-React Typescript 
-Socket.io
-GraphQL
-MongoDB
+- React Typescript 
+- Socket.io
+- GraphQL
+- MongoDB
 
-Google Cloud Platform - hosting
+- Google Cloud Platform - hosting
